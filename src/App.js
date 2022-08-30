@@ -1,6 +1,7 @@
 import "./styles.css";
 import {data} from "./data.js"
 import TeamList from "./TeamList.js"
+import FixtureList from "./FixtureList.js"
 
 export default function App() {
   let teamList = [];
@@ -24,8 +25,7 @@ export default function App() {
         teamList.push(team);
       }
     })
-  
-    console.log(dateTest<games.date, games.date);
+
     if(dateTest > games.date){
     if(games.score[teams[0]] > games.score[teams[1]] ) {
       teamInfo[teams[0]].points +=3; 
@@ -103,11 +103,12 @@ export default function App() {
   return (
     <div className="App">
       <h1>Premier League Top 6 Table</h1>
-    
     <TeamList
     teamInfo = {teamInfoArray}
     tableOrder = {tableOrder}
   />
+
+<FixtureList/>
   
       </div>
   );
