@@ -21,8 +21,8 @@ return(
   <th>Team Name</th>
   <th>Games Played</th>
   <th>Wins</th>
-  <th>Loss</th>
   <th>Draw</th>
+  <th>Loss</th>
   <th>Points</th>
   <th>Goals Scored</th>
   <th>Goals Conceded</th>

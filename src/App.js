@@ -5,6 +5,7 @@ import TeamList from "./TeamList.js"
 export default function App() {
   let teamList = [];
   let teamInfo = {};
+  const dateTest =  "2021-05-05T14:00:00";
   for (let games of data) {
     let teams = Object.keys(games.score);
     teams.forEach(team => {
@@ -22,25 +23,24 @@ export default function App() {
         }
         teamList.push(team);
       }
-      if (games.score[team] === null) {
-        games.score[team] = 0;
-      }
     })
-
+  
+    console.log(dateTest<games.date, games.date);
+    if(dateTest > games.date){
     if(games.score[teams[0]] > games.score[teams[1]] ) {
       teamInfo[teams[0]].points +=3; 
       teamInfo[teams[0]].wins ++; 
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
-      teamInfo[teams[0]].fixtures.push(games.score);
+      teamInfo[teams[0]].fixtures.push(games);
 
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].lose ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
-      teamInfo[teams[1]].fixtures.push(games.score);
+      teamInfo[teams[1]].fixtures.push(games);
     }
 
     if(games.score[teams[1]] > games.score[teams[0]] ) {
@@ -49,13 +49,13 @@ export default function App() {
       teamInfo[teams[1]].wins ++; 
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
-      teamInfo[teams[1]].fixtures.push(games.score);
+      teamInfo[teams[1]].fixtures.push(games);
 
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].lose ++; 
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
-      teamInfo[teams[0]].fixtures.push(games.score);
+      teamInfo[teams[0]].fixtures.push(games);
 
     }
     
@@ -65,15 +65,19 @@ export default function App() {
       teamInfo[teams[0]].tie ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
-      teamInfo[teams[0]].fixtures.push(games.score);
+      teamInfo[teams[0]].fixtures.push(games);
 
       teamInfo[teams[1]].points ++; 
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].tie ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
-      teamInfo[teams[1]].fixtures.push(games.score);
+      teamInfo[teams[1]].fixtures.push(games);
     }
+  } else {
+    teamInfo[teams[0]].fixtures.push(games);
+    teamInfo[teams[1]].fixtures.push(games);
+  }
   
   }
 
