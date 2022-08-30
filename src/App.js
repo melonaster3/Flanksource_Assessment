@@ -1,6 +1,6 @@
 import "./styles.css";
 import {data} from "./data.js"
-import Team from "./Team.js"
+import TeamList from "./TeamList.js"
 
 export default function App() {
   let teamList = [];
@@ -12,6 +12,9 @@ export default function App() {
         teamInfo[team] = {
           name : team,
           points : 0,
+          wins : 0,
+          lose : 0,
+          tie : 0,
           games : 0, 
           goalScored : 0,
           goalConceded :0,
@@ -26,12 +29,14 @@ export default function App() {
 
     if(games.score[teams[0]] > games.score[teams[1]] ) {
       teamInfo[teams[0]].points +=3; 
+      teamInfo[teams[0]].wins ++; 
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
       teamInfo[teams[0]].fixtures.push(games.score);
 
       teamInfo[teams[1]].games ++;
+      teamInfo[teams[1]].lose ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
@@ -41,11 +46,13 @@ export default function App() {
     if(games.score[teams[1]] > games.score[teams[0]] ) {
       teamInfo[teams[1]].points +=3; 
       teamInfo[teams[1]].games ++;
+      teamInfo[teams[1]].wins ++; 
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].fixtures.push(games.score);
 
       teamInfo[teams[0]].games ++;
+      teamInfo[teams[0]].lose ++; 
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
       teamInfo[teams[0]].fixtures.push(games.score);
@@ -55,12 +62,14 @@ export default function App() {
     if(games.score[teams[1]] === games.score[teams[0]] ) {
       teamInfo[teams[0]].points ++; 
       teamInfo[teams[0]].games ++;
+      teamInfo[teams[0]].tie ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
       teamInfo[teams[0]].fixtures.push(games.score);
 
       teamInfo[teams[1]].points ++; 
       teamInfo[teams[1]].games ++;
+      teamInfo[teams[1]].tie ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].fixtures.push(games.score);
@@ -74,29 +83,28 @@ export default function App() {
     teamInfoArray.push(teamInfo[teams]);
   }
 
+  let tableOrder = [];
+
+  for (let team of teamInfoArray) {
+    tableOrder.push([team.name, team.points, (team.goalScored - team.goalConceded), team])
+  }
+
+  tableOrder.sort(function(a,b) {
+    return b[1] - a[1];
+  })
+
+  console.log(tableOrder);
+
 
   return (
     <div className="App">
       <h1>Premier League Top 6 Table</h1>
-      <table>
-    <tbody>
-    <tr>
-      <th>Team Name</th>
-      <th>Games Played</th>
-      <th>Wins</th>
-      <th>Loss</th>
-      <th>Draw</th>
-      <th>Points</th>
-      <th>Goals Scored</th>
-      <th>Goals Conceded</th>
-      <th>Goal Difference</th>
-      <th></th>
-    </tr>
-    </tbody>
-    <Team
+    
+    <TeamList
     teamInfo = {teamInfoArray}
-    />
-      </table>
-    </div>
+    tableOrder = {tableOrder}
+  />
+  
+      </div>
   );
 }

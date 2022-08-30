@@ -1,20 +1,18 @@
 import "./styles.css";
-import EachTeam from "./EachTeam"
-
 export default function Team (props) {
-
   
-  const teamInfo = props.teamInfo.map((team) => {
-      return ( 
-        <EachTeam
-        teaminformation = {team}
-        />
-      )
-  })
-
-return(
-<div>
-{teamInfo}
-</div>
-)
+console.log(props);
+  return(
+<tr>
+      <td>{props.teamInfo[0]}</td>
+      <td>{props.teamInfo[3].games}</td>
+      <td>{props.teamInfo[3].wins}</td>
+      <td>{props.teamInfo[3].lose}</td>
+      <td>{props.teamInfo[3].tie}</td>
+      <td>{props.teamInfo[3].points}</td>
+      <td>{props.teamInfo[3].goalScored}</td>
+      <td>{props.teamInfo[3].goalConceded}</td>
+      <td>{props.teamInfo[2]}</td>
+      </tr>
+  )
 }
