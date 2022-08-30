@@ -1,5 +1,7 @@
 import "./styles.css";
 import {data} from "./data.js"
+import Team from "./Team.js"
+
 export default function App() {
   let teamList = [];
   let teamInfo = {};
@@ -8,6 +10,7 @@ export default function App() {
     teams.forEach(team => {
       if (!teamList.includes(team)) {
         teamInfo[team] = {
+          name : team,
           points : 0,
           games : 0, 
           goalScored : 0,
@@ -64,12 +67,19 @@ export default function App() {
     }
   
   }
-  
+
+  let teamInfoArray = [];
+  let teamName = Object.keys(teamInfo);
+  for (let teams of teamName) {
+    teamInfoArray.push(teamInfo[teams]);
+  }
+
 
   return (
     <div className="App">
       <h1>Premier League Top 6 Table</h1>
       <table>
+    <tbody>
     <tr>
       <th>Team Name</th>
       <th>Games Played</th>
@@ -82,7 +92,10 @@ export default function App() {
       <th>Goal Difference</th>
       <th></th>
     </tr>
-
+    </tbody>
+    <Team
+    teamInfo = {teamInfoArray}
+    />
       </table>
     </div>
   );
