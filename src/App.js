@@ -63,7 +63,6 @@ export default function App() {
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].fixtures.push(games.score);
-
     }
   
   }
@@ -72,8 +71,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Hello Codesandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      <h1>Premier League Top 6 Table</h1>
+      
     </div>
   );
 }
