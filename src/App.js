@@ -11,7 +11,8 @@ export default function App() {
           points : 0,
           games : 0, 
           goalScored : 0,
-          goalConceded :0
+          goalConceded :0,
+          fixtures : []
         }
         teamList.push(team);
       }
@@ -25,10 +26,14 @@ export default function App() {
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
+      teamInfo[teams[0]].fixtures.push(games.score);
+
 
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
+      teamInfo[teams[1]].goalConceded += games.score[teams[0]];
+      teamInfo[teams[1]].fixtures.push(games.score);
 
     }
 
@@ -37,10 +42,13 @@ export default function App() {
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
+      teamInfo[teams[1]].fixtures.push(games.score);
 
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
+      teamInfo[teams[0]].fixtures.push(games.score);
+
     }
     
     if(games.score[teams[1]] === games.score[teams[0]] ) {
@@ -48,11 +56,14 @@ export default function App() {
       teamInfo[teams[0]].games ++;
       teamInfo[teams[0]].goalScored += games.score[teams[0]];
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
+      teamInfo[teams[0]].fixtures.push(games.score);
 
       teamInfo[teams[1]].points ++; 
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
+      teamInfo[teams[1]].fixtures.push(games.score);
+
     }
   
   }
