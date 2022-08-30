@@ -28,13 +28,11 @@ export default function App() {
       teamInfo[teams[0]].goalConceded += games.score[teams[1]];
       teamInfo[teams[0]].fixtures.push(games.score);
 
-
       teamInfo[teams[1]].games ++;
       teamInfo[teams[1]].goalScored += games.score[teams[1]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].goalConceded += games.score[teams[0]];
       teamInfo[teams[1]].fixtures.push(games.score);
-
     }
 
     if(games.score[teams[1]] > games.score[teams[0]] ) {
@@ -67,12 +65,25 @@ export default function App() {
   
   }
   
-  console.log(teamInfo)
 
   return (
     <div className="App">
       <h1>Premier League Top 6 Table</h1>
-      
+      <table>
+    <tr>
+      <th>Team Name</th>
+      <th>Games Played</th>
+      <th>Wins</th>
+      <th>Loss</th>
+      <th>Draw</th>
+      <th>Points</th>
+      <th>Goals Scored</th>
+      <th>Goals Conceded</th>
+      <th>Goal Difference</th>
+      <th></th>
+    </tr>
+
+      </table>
     </div>
   );
 }
